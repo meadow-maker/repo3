@@ -5,8 +5,6 @@ metadata:
   labels:
     app.kubernetes.io/name: guestbook
     app.kubernetes.io/component: frontend
-    #Writing spec next
-    #Type: LB
 spec:
   type: LoadBalancer
   ports:
