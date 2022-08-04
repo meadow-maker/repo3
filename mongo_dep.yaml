@@ -22,7 +22,7 @@ spec:
         image: mongo:4.2
         volumeMounts:
         - name: mongodb-data
-          mountPath: /data/db
+          mountPath: /data/mydb
         args:
           - --bind_ip
           - 0.0.0.0
@@ -35,4 +35,4 @@ spec:
       volumes:
       - name: mongodb-data
         persistentVolumeClaim:
-            claimName: mongodb-pvc2
+            claimName: mongodb-pvc
