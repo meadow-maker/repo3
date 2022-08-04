@@ -1,25 +1,28 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: bari_mongo
+  name: mongo
   labels:
-    app.kubernetes.io/name: bari_mongo
+    app.kubernetes.io/name: bari-mongo
     app.kubernetes.io/component: backend
 spec:
   selector:
     matchLabels:
-      app.kubernetes.io/name: bari_mongo
+      app.kubernetes.io/name: bari-mongo
       app.kubernetes.io/component: backend
   replicas: 1
   template:
     metadata:
       labels:
-        app.kubernetes.io/name: bari_mongo
+        app.kubernetes.io/name: bari-mongo
         app.kubernetes.io/component: backend
     spec:
       containers:
-      - name: bari_mongo
+      - name: bari-mongo
         image: mongo:4.2
+        volumeMounts:
+        - name: mongodb-data
+          mountPath: /data/db
         args:
           - --bind_ip
           - 0.0.0.0
@@ -29,10 +32,7 @@ spec:
             memory: 100Mi
         ports:
         - containerPort: 27017
-        volumeMounts:
-        - name: mongodb-data
-          mountPath: /data/db
       volumes:
       - name: mongodb-data
         persistentVolumeClaim:
-            claimName: mongo-pvc
+            claimName: mongodb-pvc2
